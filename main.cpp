@@ -9,6 +9,9 @@ using namespace std;
 bool readNumbers(vector<unsigned char>& vec, const char* filename) {
     ifstream input(filename);
     int temp;
+    if (!input.is_open()) {
+        return false;
+    }
     while (input >> temp) {
         if (temp >= 0 && temp <= 255) {
             vec.push_back(static_cast<unsigned char>(temp));
