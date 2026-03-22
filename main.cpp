@@ -14,6 +14,12 @@ void radixSort(vector<unsigned char>& A) {
             int bit = (num >> k) & 1;
             C[bit]++;
         }
+        C[1] += C[0];
+        for (int i = A.size() - 1; i >= 0; i--) {
+            int bit = (A[i] >> k) & 1;
+            B[--C[bit]] = A[i];
+        }
+        swap(A, B);
     }
 }
 
