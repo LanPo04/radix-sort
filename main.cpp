@@ -22,6 +22,16 @@ bool readNumbers(vector<unsigned char>& vec, const char* filename) {
 }
 
 
+void writeNumbers(unsigned char* polje, unsigned int velikost) {
+    ofstream output("out.txt");
+    for (unsigned int i = 0; i < velikost; i++) {
+        if (i > 0) output << ' ';
+        output << static_cast<int>(polje[i]);
+    }
+    output << endl;
+}
+
+
 int main(int argc, char* argv[]) {
     vector<unsigned char> A;
     if (argc != 2) {
@@ -32,5 +42,6 @@ int main(int argc, char* argv[]) {
         cout << "Error: Cannot open input file" << endl;
         return 1;
     }
+    writeNumbers(&A[0], A.size());
     return 0;
 }
