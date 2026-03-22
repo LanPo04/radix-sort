@@ -6,12 +6,23 @@
 
 using namespace std;
 
+void radixSort(vector<unsigned char>& A) {
+    vector<unsigned char> B(A.size());
+    for (int k = 0; k < 8; k++) {
+        vector<int> C(2, 0);
+        for (auto num : A) {
+            int bit = (num >> k) & 1;
+            C[bit]++;
+        }
+    }
+}
+
 bool readNumbers(vector<unsigned char>& vec, const char* filename) {
     ifstream input(filename);
-    int temp;
     if (!input.is_open()) {
         return false;
     }
+    int temp;
     while (input >> temp) {
         if (temp >= 0 && temp <= 255) {
             vec.push_back(static_cast<unsigned char>(temp));
@@ -20,7 +31,6 @@ bool readNumbers(vector<unsigned char>& vec, const char* filename) {
     input.close();
     return true;
 }
-
 
 void writeNumbers(unsigned char* polje, unsigned int velikost) {
     ofstream output("out.txt");
@@ -42,6 +52,7 @@ int main(int argc, char* argv[]) {
         cout << "Error: Cannot open input file" << endl;
         return 1;
     }
+    radixSort(A);
     writeNumbers(&A[0], A.size());
     return 0;
 }
